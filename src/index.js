@@ -1,5 +1,11 @@
-import { Todo } from "./components/todo";
+import { getTodos } from "./controllers/storage/getTodos";
 
-const todo = new Todo('epico', 'this is un epico', 'date', 'high', 'pending')
 
-console.log(todo);
+// let defaultProject = new Project("default");
+// localStorage.setItem("projects", JSON.stringify ([defaultProject]));
+
+// let project = JSON.parse(localStorage.getItem("projects"));
+
+// console.log(project);
+
+// storeProjects({name: "poggers", todos: []})
