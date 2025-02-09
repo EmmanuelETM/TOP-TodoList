@@ -8,21 +8,53 @@
 </head>
 <body>
     <header>
-        <h1>
+        <h2>
             <img class="icon" src="./assets/task_black.svg" alt="Todo logo">
             Todo List
-        </h1>
+        </h2>
     </header>
     <main>
         <aside class="projects-container">
-
+            <ul class="sidebar-list">
+                <li>
+                    <i  class="fa-solid fa-bolt"
+                        style="color: goldenrod"></i> 
+                    Today
+                    <span class="todo-count">1</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-calendar-week"></i> 
+                    Upcoming
+                    <span class="todo-count">2</span>
+                </li>
+            </ul>
+            <hr>
+            <div class="projects-title">
+                <h4>Projects</h4>
+                <button class="add-project">
+                    <i class="fa-solid fa-square-plus"></i>
+                </button>
+            </div>
         </aside>
-        <section class="todos-container">
-
-        </section>
+        <div class="section-footer">
+            <section>
+                <div>
+                    <h1>Home</h1>
+                    <button>+ Add Todo</button>
+                </div>
+                <div class="todo-container">
+                    <div>Todo</div>
+                    <div>Todo</div>
+                    <div>Todo</div>
+                </div>
+            </section>
+            <footer>
+                <h4><a href="https://github.com/EmmanuelETM/"><i class="fa-brands fa-github"></i> EmmanuelETM</a> &copy; 2025 </h2>
+            </footer>
+        </div>
     </main>
-    <footer>
-        <h4><a href="https://github.com/EmmanuelETM/"><i class="fa-brands fa-github"></i> EmmanuelETM</a> &copy; 2025 </h2>
-    </footer>
+
+
+    <script src="./index.js"></script>
 </body>
 </html>

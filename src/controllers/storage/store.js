@@ -1,12 +1,13 @@
+import Find  from "./find";
 //store projects
-export function storeProjects(project) {
+function storeProject(project) {
     const projects = JSON.parse(localStorage.getItem("projects"));
     let string = JSON.stringify([...projects, project])
     localStorage.setItem("projects", string);
 }
 
 //store Todos
-export function storeTodos(projectName, todo) {
+function storeTodo(projectName, todo) {
     const data = JSON.parse(localStorage.getItem("projects"));
     const index = Find(data, projectName);
 
@@ -16,5 +17,7 @@ export function storeTodos(projectName, todo) {
 
     data[index].todos = [...data[index].todos, todo];
 
-    localStorage.setItem("projects", JSON.stringify(projects));
+    localStorage.setItem("projects", JSON.stringify(data));
 }
+
+export { storeProject, storeTodo }
