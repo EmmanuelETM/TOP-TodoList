@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Outfit:wght@100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    font-size: 0.625rem;
+    --rosewater: #f5e0dc;
+    --flamingo: #f2cdcd;
+    --pink: #f5c2e7;
+    --mauve: #cba6f7;
+    --red: #f38ba8;
+    --maroon: #eba0ac;
+    --peach: #fab387;
+    --yellow: #f9e2af;
+    --green: #a6e3a1;
+    --teal: #94e2d5;
+    --sky: #89dceb;
+    --sapphire: #74c7ec;
+    --blue: #89b4fa;
+    --lavender: #b4befe;
+    --text: #cdd6f4;
+    --subtext-1: #bac2de;
+    --subtext-0: #a6adc8;
+    --overlay-2: #9399b2;
+    --overlay-1: #7f849c;
+    --overlay-0: #6c7086;
+    --surface-2: #585b70;
+    --surface-1: #45475a;
+    --surface-0: #313244;
+    --base: #1e1e2e;
+    --mantle: #181825;
+    --crust: #11111b;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: "Outfit", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2rem;
+    background-color: var(--base);
+    color: var(--text);
+    overflow: auto;
+}
+
+header {
+    background-color: var(--mantle);
+    padding: 1rem;
+    margin-left: 1rem;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+}
+
+hr {
+    color: var(--text);
+    border: 1px var(--text) solid;
+    width: 100%;
+}
+
+aside {
+    width: 25rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: var(--text);
+    background-color: var(--crust);
+}
+
+section {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+
+}
+
+footer {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+ul {
+    text-decoration: none;
+    list-style: none;
+}
+
+ul>li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+    background-color: transparent;
+    border-radius: 1rem;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+ul>li:hover {
+    color: var(--crust);
+    background-color: var(--rosewater);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+a {
+    text-decoration: none;
+    color: var(--text);
+}
+

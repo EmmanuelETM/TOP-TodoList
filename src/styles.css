@@ -1,107 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Outfit:wght@100..900&display=swap');
-
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-
-:root {
-    font-size: 0.625rem;
-}
-
-body {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-family: "Outfit", serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 2rem;
-    color: black;
-    overflow: auto;
-}
-
-header {
-    background-color: lightblue;
-    padding: 1rem;
-}
-
-main {
-    flex: 1;
-    display: flex;
-    justify-content: flex-start;
-    align-items: stretch;
-    width: 100%;
-}
-
-hr {
-    color: black;
-    border: 1px black solid;
-}
-
-aside {
-    width: 25rem;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    background-color: lightgray;
-}
-
-section {
-    flex: 1;
-    padding: 1rem;
-}
-
-footer {
-    text-align: center;
-    font-size: 1.5rem;
-    padding: 1rem;
-}
-
-ul {
-    text-decoration: none;
-    list-style: none;
-}
-
-ul>li {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    font-size: 1.5rem;
-    background-color: transparent;
-    border-radius: 1rem;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-}
-
-ul>li:hover {
-    background-color: gray;
-    opacity: 1;
-    transform: scale(1.05);
-}
-
 .todo-count {
     margin-left: auto;
-    background-color: lightblue;
+    color: var(--crust);
+    background-color: var(--lavender);
     padding: 0.3rem 0.6rem;
     border-radius: 1rem;
     font-size: 1.2rem;
+    font-weight: 700;
 }
 
 .section-footer {
     display: flex;
     flex-direction: column;
     width: 100%;
-}
-
-a {
-    text-decoration: none;
-    color: black;
 }
 
 .projects-title {
@@ -117,11 +27,12 @@ a {
     font-size: 2.5rem;
     margin-top: 0.5rem;
     cursor: pointer;
+    color: var(--surface-0);
     transition: color 0.15s ease-in, transform 0.2s ease-out;
 }
 
 .add-project:hover {
-    color: lightsalmon;
+    color: var(--teal);
     opacity: 1;
 }
 
@@ -137,12 +48,14 @@ a {
     align-items: center;
     margin-bottom: 1rem;
     border-radius: 1rem;
+    color: var(--text);
     background-color: transparent;
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .list-item:hover {
-    background-color: gray;
+    background-color: var(--rosewater);
+    color: var(--mantle);
     opacity: 1;
     transform: scale(1.02);
 }
@@ -159,12 +72,16 @@ a {
 }
 
 
-.delete-item {
+.delete-item, .delete-todo, .edit-todo, .edit-project {
     padding: 0.5rem;
-    font-size: 1.5rem;
     cursor: pointer;
     border: none;
     background-color: transparent;
+}
+
+.delete-item {
+    color: var(--crust);
+    font-size: 1.5rem;
     transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
@@ -172,3 +89,114 @@ a {
     color: red;
     opacity: 1;
 }
+
+.content {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 6rem;
+}
+
+.add-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.add-todo {
+    padding: 1rem;
+    font-size: 2rem;
+    color: var(--text);
+    background-color: var(--base);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: none;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.add-todo:hover {
+    color: var(--crust);
+    background-color: var(--teal);
+}
+
+.todo-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    color: var(--crust);
+    background-color: var(--blue);
+    border: 1px var(--subtext-1) solid;
+}
+
+.edit-project {
+    font-size: 2rem;
+    color: var(--text);
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.edit-project:hover {
+    color: var(--peach);
+}
+
+.edit-todo {
+    font-size: 2rem;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.edit-todo:hover  {
+    color: var(--text);
+}
+
+.delete-todo {
+    font-size: 2rem;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.delete-todo:hover {
+    color: red;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.todo-hr {
+    margin-top: 2rem;
+}
+
+.high-priority {
+    background-color: var(--red);
+    border: none;
+}
+
+.medium-priority {
+    background-color: var(--yellow);
+    border: none;
+}   

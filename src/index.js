@@ -1,4 +1,5 @@
 import "./styles.css";
+import "./index.css";
 import { storeProject, storeTodo } from "./controllers/storage/store";
 import { createProject } from "./controllers/project";
 import { createTodo } from "./controllers/todo";
@@ -10,8 +11,8 @@ const App = () => {
     const projectsUl = document.createElement("ul");
 
     if (!localStorage.getItem("projects")) {
-        let defaultProject = createProject("default");
-        localStorage.setItem("projects", JSON.stringify([defaultProject]));
+        let home = createProject("Home");
+        localStorage.setItem("projects", JSON.stringify([home]));
     }
 
     const renderProjects = () => {
@@ -55,17 +56,16 @@ const App = () => {
     renderProjects();
     // renderTodos("default");
 
+
 }
 
 App();
 
 
-// const todo1 = createTodo("test", "we testing this shit", "tomorrow", "high", "pending");
+//     const todo1 = createTodo("test", "we testing this shit", "tomorrow", "high", "pending");
 // const todo2 = createTodo("test", "we testing this shit", "tomorrow", "high", "pending");
-// storeTodo("default", todo1);
-// storeTodo("default", todo2);
-// let project = JSON.parse(localStorage.getItem("projects"));
-
-
-
+// storeTodo("kewl", todo1);
+// storeTodo("kewl", todo2);
+let project = JSON.parse(localStorage.getItem("projects"));
+console.log(project);
 // storeProject({name: "kewl", todos: []})

@@ -9,7 +9,7 @@
 <body>
     <header>
         <h2>
-            <img class="icon" src="./assets/task_black.svg" alt="Todo logo">
+            <i class="fa-solid fa-circle-check" style="color: var(--text); margin-right: 1rem;"></i>
             Todo List
         </h2>
     </header>
@@ -18,7 +18,7 @@
             <ul class="sidebar-list">
                 <li>
                     <i  class="fa-solid fa-bolt"
-                        style="color: goldenrod"></i> 
+                        style="color: var(--peach)"></i> 
                     Today
                     <span class="todo-count">1</span>
                 </li>
@@ -26,6 +26,11 @@
                     <i class="fa-solid fa-calendar-week"></i> 
                     Upcoming
                     <span class="todo-count">2</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Completed
+                    <span class="todo-count">1</span>
                 </li>
             </ul>
             <hr>
@@ -38,14 +43,51 @@
         </aside>
         <div class="section-footer">
             <section>
-                <div>
-                    <h1>Home</h1>
-                    <button>+ Add Todo</button>
-                </div>
-                <div class="todo-container">
-                    <div>Todo</div>
-                    <div>Todo</div>
-                    <div>Todo</div>
+                <div class="content">
+                    <div class="content-title">
+                        <h1 class="content-text">Home</h1>
+                        <button class="edit-project"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </div>
+                    <div class="add-container">
+                        <span>0% completed</span>
+                        <button class="add-todo">+ Add Todo</button>
+                    </div>
+                    <hr class="todo-hr">
+                    <div class="todo-container">
+                        <div class="todo-item high-priority">
+                            <div class="title-container">
+                                <span class="check"><i class="fa-solid fa-circle-check"></i></span>
+                                <p>title</p>
+                            </div>
+                            <p>due date</p>
+                            <div class="todo-buttons">
+                                <button class="edit-todo"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="delete-todo"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="todo-item medium-priority">
+                            <div class="title-container">
+                                <span class="check"><i class="fa-solid fa-circle-check"></i></span>
+                                <p>title</p>
+                            </div>
+                            <p>due date</p>
+                            <div class="todo-buttons">
+                                <button class="edit-todo"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="delete-todo"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="todo-item">
+                            <div class="title-container">
+                                <span class="check"><i class="fa-solid fa-circle-check"></i></span>
+                                <p>title</p>
+                            </div>
+                            <p>due date</p>
+                            <div class="todo-buttons">
+                                <button class="edit-todo"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="delete-todo"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
             <footer>
@@ -54,7 +96,22 @@
         </div>
     </main>
 
-
+    <dialog class="project-dialog">
+        <form action="/">
+            <label for="project-title">Enter the name: </label>
+            <input type="text" name="projectTitle" id="project-title"/>
+            <button class="submit-button" type="submit">Create Project</button>
+        </form>
+    </dialog>
+    <dialog class="todo-dialog" open>
+        <form action="/">
+            <label for="todo-title">Title</label>
+            <input type="text" name="todoTitle" id="todo-title"/>
+            <label for="todo-description">Description</label>
+            <textarea name="todoDescription" id="todo-description"></textarea>
+            <button class="submit-button" type="submit">Create Project</button>
+        </form>
+    </dialog>
     <script src="./index.js"></script>
 </body>
 </html>
