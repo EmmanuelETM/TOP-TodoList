@@ -85,13 +85,13 @@ option {
 }
 
 
-.todo-title, .todo-description {
+.todo-title, .todo-description, .project-description, .project-title {
     display: flex;
     flex-direction: column;
     width: 80%;
 }
 
-.todo-title>input, .project-title>input, .todo-description>textarea {
+.todo-title>input, .project-title>input, .todo-description>textarea, .project-description>textarea {
     border-radius: 0.6rem;
 }
 
@@ -99,15 +99,9 @@ option {
     padding: 1rem;
 }
 
-.todo-description>textarea {
+.todo-description>textarea, .project-description>textarea {
     max-width: 100%;
     min-width: 100%;
-}
-
-.project-title {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
 }
 
 .overlay {

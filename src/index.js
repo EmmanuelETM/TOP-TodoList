@@ -2,15 +2,17 @@ import "./styles/index.css";
 import "./styles/content.css";
 import "./styles/dialog.css";
 import "./styles/sidebar.css";
-import { storeProject, storeTodo } from "./controllers/storage/store";
-import { renderProjects } from "./ui/render_projects";
+import { renderProjects, renderSidebar } from "./ui/renderSidebar";
+import { renderContent } from './ui/renderContent';
+import { deleteProject } from "./controllers/storage/store";
 import { createProject } from "./controllers/project";
 import { createTodo } from "./controllers/todo";
 import { getTodos } from "./controllers/storage/getTodos";
 
-const App = () => {
+
+const App = (() => {
     const projectContainer = document.querySelector(".projects-container");
-    const todosContainer = document.querySelector(".todos-container");
+    const contentContainer = document.querySelector(".content");
     const projectsUl = document.createElement("ul");
     const projectDialog = document.querySelector(".project-dialog");
     const overlay = document.querySelector(".overlay");
@@ -19,15 +21,48 @@ const App = () => {
     const todoDialog = document.querySelector(".todo-dialog");
     const addTodo = document.querySelector(".add-todo");
     const closeTodo = document.querySelector(".close-todo");
-
+    const projectDialogForm = document.querySelector(".project-dialog>form");
+    const deleteProjectButtons = document.querySelectorAll('.delete-item');
 
     if (!localStorage.getItem("projects")) {
-        let home = createProject("Home");
-        localStorage.setItem("projects", JSON.stringify([home]));
+        localStorage.setItem("projects", JSON.stringify([]));
+        createProject("Home", 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis atque amet et cum dolor quasi mollitia omnis necessitatibus');
     }
 
-    renderProjects(projectContainer, projectsUl);
-    // renderTodos("default");
+    function handleProjectForm(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const dataObj = Object.fromEntries(formData);
+
+        createProject(dataObj.projectTitle, dataObj.projectDescription);
+        renderSidebar(projectContainer, projectsUl);
+
+        projectDialog.close();
+        overlay.classList.remove("active");
+        console.log(dataObj);
+    }
+
+    function handleLiClick(event) {
+        const li = event.target.closest("li");
+        if (!li || event.target.closest(".delete-item")) return;
+
+        const projectId = li.getAttribute("data-project-id");
+        contentContainer.setAttribute("data-project-id", projectId);
+        renderContent(projectId);
+    }
+
+    function handleDeleteProject(event) {
+        const deleteBtn = event.target.closest(".delete-item");
+        if (!deleteBtn) return; 
+    
+        const li = deleteBtn.closest("li");
+        const projectId = li.getAttribute("data-project-id");
+    
+        deleteProject(projectId);
+        renderSidebar(projectContainer, projectsUl);
+    }
+
+    renderSidebar(projectContainer, projectsUl);
 
     addProject.addEventListener("click", () => {
         projectDialog.showModal();
@@ -39,6 +74,12 @@ const App = () => {
         overlay.classList.remove("active");
     })
 
+    deleteProjectButtons.forEach(button => {
+        button.addEventListener("click", handleDeleteProject);
+    });
+
+    projectDialogForm.addEventListener("submit", handleProjectForm);
+
     addTodo.addEventListener("click", () => {
         todoDialog.showModal();
         overlay.classList.add("active");
@@ -49,9 +90,15 @@ const App = () => {
         overlay.classList.remove("active");
     })
 
-}
+    projectsUl.addEventListener("click", handleLiClick);
+    
 
-App();
+    projectsUl.addEventListener("click", handleDeleteProject);
+
+
+    
+
+})();
 
 
 //     const todo1 = createTodo("test", "we testing this shit", "tomorrow", "high", "pending");

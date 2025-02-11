@@ -1,5 +1,7 @@
 import { Todo } from "../models/todo"
 
-export function createTodo(title, description, dueDate, priority, status) {
-    return new Todo(title, description, dueDate, priority, status);
+export function createTodo(projectId, title, description, dueDate, priority, status) {
+    const id = crypto.randomUUID();
+    const todo = new Todo(id, title, description, dueDate, priority, status);
+    storeTodo(projectId, todo);
 }

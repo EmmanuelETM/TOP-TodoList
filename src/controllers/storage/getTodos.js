@@ -1,8 +1,5 @@
-import Find from "./find";
-
-export function getTodos(projectName) {
+export function getTodos(projectId) {
     const data = JSON.parse(localStorage.getItem("projects"));
-    const index = Find(data, projectName);
-    const todos = data[index].todos;
+    const todos = data[projectId].todos;
     return todos;
 }
