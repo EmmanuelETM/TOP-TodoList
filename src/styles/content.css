@@ -1,0 +1,130 @@
+
+.content {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 6rem;
+}
+
+.content-description {
+    margin-top: 2rem;
+    color: var(--subtext-0);
+    line-height: 1.5;
+}
+
+.add-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.add-todo {
+    padding: 1rem;
+    font-size: 2rem;
+    color: var(--text);
+    background-color: var(--base);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: none;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.add-todo:hover {
+    color: var(--crust);
+    background-color: var(--teal);
+}
+
+.todo-hr {
+    margin-top: 2rem;
+}
+
+.todo-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    color: var(--crust);
+    background-color: var(--blue);
+    border: 1px var(--subtext-1) solid;
+}
+
+.edit-project {
+    font-size: 2rem;
+    color: var(--text);
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.edit-project:hover {
+    color: var(--peach);
+}
+
+.edit-todo {
+    font-size: 2rem;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.edit-todo:hover  {
+    color: var(--text);
+}
+
+.delete-todo {
+    font-size: 2rem;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.delete-todo:hover {
+    color: red;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.high-priority {
+    background-color: var(--red);
+    border: none;
+}
+
+.medium-priority {
+    background-color: var(--yellow);
+    border: none;
+}   
+
+.create-todo, .create-project {
+    width: 80%;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: none;
+    background-color: var(--sky);
+    cursor: pointer;
+}
+
+
+
+

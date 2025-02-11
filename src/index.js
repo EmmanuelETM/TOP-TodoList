@@ -1,5 +1,7 @@
-import "./styles.css";
-import "./index.css";
+import "./styles/index.css";
+import "./styles/content.css";
+import "./styles/dialog.css";
+import "./styles/sidebar.css";
 import { storeProject, storeTodo } from "./controllers/storage/store";
 import { renderProjects } from "./ui/render_projects";
 import { createProject } from "./controllers/project";

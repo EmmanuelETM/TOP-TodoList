@@ -1,0 +1,85 @@
+.todo-count {
+    margin-left: auto;
+    color: var(--crust);
+    background-color: var(--lavender);
+    padding: 0.3rem 0.6rem;
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.projects-title {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.add-project {
+    background-color: transparent;
+    border: none;
+    font-size: 2.5rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    color: var(--surface-0);
+    transition: color 0.15s ease-in, transform 0.2s ease-out;
+}
+
+.add-project:hover {
+    color: var(--teal);
+    opacity: 1;
+}
+
+.sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 1rem;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    color: var(--text);
+    background-color: transparent;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.list-item:hover {
+    background-color: var(--rosewater);
+    color: var(--mantle);
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+.project-button {
+    flex: 1;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+
+.delete-item, .delete-todo, .edit-todo, .edit-project {
+    padding: 0.5rem;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.delete-item {
+    color: var(--crust);
+    font-size: 1.5rem;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.delete-item:hover {
+    color: red;
+    opacity: 1;
+}
