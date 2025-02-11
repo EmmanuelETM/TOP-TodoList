@@ -213,6 +213,25 @@
     border-radius: 1rem;
     border: none;
     background-color: var(--sky);
+    cursor: pointer;
+}
+
+.close-project, .close-todo {
+    position: fixed;
+    right: 2rem;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    color: var(--text);
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.close-project:hover, .close-todo:hover {
+    background-color: var(--red);
+    opacity: 1;
+    color: black;
 }
 
 .date-priority {
@@ -227,6 +246,10 @@
 .date-container, .priority-container {
     display: flex;
     flex-direction: column;
+    width: 50%;
+}
+
+.todo-dialog {
     width: 50%;
 }
 
@@ -254,4 +277,6 @@
     flex-direction: column;
     width: 80%;
 }
+
+
 

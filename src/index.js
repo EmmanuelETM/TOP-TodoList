@@ -1,6 +1,7 @@
 import "./styles.css";
 import "./index.css";
 import { storeProject, storeTodo } from "./controllers/storage/store";
+import { renderProjects } from "./ui/render_projects";
 import { createProject } from "./controllers/project";
 import { createTodo } from "./controllers/todo";
 import { getTodos } from "./controllers/storage/getTodos";
@@ -9,53 +10,42 @@ const App = () => {
     const projectContainer = document.querySelector(".projects-container");
     const todosContainer = document.querySelector(".todos-container");
     const projectsUl = document.createElement("ul");
+    const projectDialog = document.querySelector(".project-dialog");
+    const overlay = document.querySelector(".overlay");
+    const addProject = document.querySelector(".add-project");
+    const closeProject = document.querySelector(".close-project");
+    const todoDialog = document.querySelector(".todo-dialog");
+    const addTodo = document.querySelector(".add-todo");
+    const closeTodo = document.querySelector(".close-todo");
+
 
     if (!localStorage.getItem("projects")) {
         let home = createProject("Home");
         localStorage.setItem("projects", JSON.stringify([home]));
     }
 
-    const renderProjects = () => {
-        const projects = JSON.parse(localStorage.getItem("projects"));
-
-        projects.forEach(element => {
-            const li = document.createElement("li");
-            const deleteButton = document.createElement("button");
-            const projectDiv = document.createElement("div");
-            const p = document.createElement("p");
-            const projectIcon = document.createElement("i");
-            const deleteIcon = document.createElement("i");
-            deleteButton.classList.add("delete-item");
-            projectDiv.classList.add("project-button");
-            projectIcon.classList.add("fa-solid");
-            projectIcon.classList.add("fa-hashtag");
-            deleteIcon.classList.add("fa-solid");
-            deleteIcon.classList.add("fa-trash");
-    
-            deleteButton.appendChild(deleteIcon);
-
-            p.textContent = element.name;
-            projectDiv.appendChild(projectIcon);
-            projectDiv.appendChild(p);
-    
-            li.classList.add("list-item");
-            li.appendChild(projectDiv);
-            li.appendChild(deleteButton);
-            projectsUl.appendChild(li);
-        });
-    
-        projectsUl.classList.add("projects-ul");
-        projectContainer.appendChild(projectsUl);
-    }
-
-    const renderTodos = (projectName) => {
-        const todos = getTodos(projectName);
-        console.log(todos);
-    }
-
-    renderProjects();
+    renderProjects(projectContainer, projectsUl);
     // renderTodos("default");
 
+    addProject.addEventListener("click", () => {
+        projectDialog.showModal();
+        overlay.classList.add("active");
+    })
+
+    closeProject.addEventListener("click", () => {
+        projectDialog.close();
+        overlay.classList.remove("active");
+    })
+
+    addTodo.addEventListener("click", () => {
+        todoDialog.showModal();
+        overlay.classList.add("active");
+    })
+
+    closeTodo.addEventListener("click", () => {
+        todoDialog.close();
+        overlay.classList.remove("active");
+    })
 
 }
 
@@ -66,6 +56,6 @@ App();
 // const todo2 = createTodo("test", "we testing this shit", "tomorrow", "high", "pending");
 // storeTodo("kewl", todo1);
 // storeTodo("kewl", todo2);
-let project = JSON.parse(localStorage.getItem("projects"));
-console.log(project);
+// let project = JSON.parse(localStorage.getItem("projects"));
+// console.log(project);
 // storeProject({name: "kewl", todos: []})
