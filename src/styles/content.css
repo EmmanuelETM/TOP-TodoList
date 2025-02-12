@@ -1,7 +1,9 @@
 .section-footer {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .content {
@@ -10,6 +12,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+
 }
 
 .content-title {
@@ -19,6 +22,7 @@
     align-items: center;
     padding-top: 6rem;
 }
+
 
 .content-description {
     margin-top: 2rem;
@@ -119,17 +123,27 @@
 .medium-priority {
     background-color: var(--yellow);
     border: none;
-}   
-
-.create-todo, .create-project {
-    width: 80%;
-    padding: 1rem;
-    border-radius: 1rem;
-    border: none;
-    background-color: var(--sky);
-    cursor: pointer;
 }
 
+/* form {
+    .create-todo, .create-project {
+        width: 80%;
+        padding: 1rem;
+        border-radius: 1rem;
+        border: none;
+        background-color: var(--sky);
+        cursor: pointer;
+    } 
 
+    section {
+        background: #000;
+
+        > button {
+            color: red;
+        
+            >:hover {}
+        }
+    }
+} */
 
 

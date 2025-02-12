@@ -87,7 +87,7 @@ section {
     padding: 1rem;
     display: flex;
     justify-content: center;
-
+    width: 80%;
 }
 
 footer {

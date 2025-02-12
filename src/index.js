@@ -48,7 +48,7 @@ const App = (() => {
 
         const projectId = li.getAttribute("data-project-id");
         contentContainer.setAttribute("data-project-id", projectId);
-        renderContent(projectId);
+        renderContent(contentContainer);
     }
 
     function handleDeleteProject(event) {
