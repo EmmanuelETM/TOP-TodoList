@@ -6,13 +6,16 @@
     width: 100%;
 }
 
-.content {
+.container {
     height: 100%;
     width: 80%;
     display: flex;
     align-items: center;
     flex-direction: column;
+}
 
+.content-container {
+    width: 100%;
 }
 
 .content-title {
@@ -26,6 +29,7 @@
 
 .content-description {
     margin-top: 2rem;
+    align-self: flex-start;
     color: var(--subtext-0);
     line-height: 1.5;
 }

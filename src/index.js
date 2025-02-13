@@ -2,17 +2,20 @@ import "./styles/index.css";
 import "./styles/content.css";
 import "./styles/dialog.css";
 import "./styles/sidebar.css";
-import { renderProjects, renderSidebar } from "./ui/renderSidebar";
-import { renderContent } from './ui/renderContent';
+import { renderProjects, renderSidebar } from "./dom/renderSidebar";
+import { renderContentTitle } from './dom/renderContentTitle';
+import { renderTodos } from "./dom/renderTodos";
 import { deleteProject } from "./controllers/storage/store";
 import { createProject } from "./controllers/project";
 import { createTodo } from "./controllers/todo";
 import { getTodos } from "./controllers/storage/getTodos";
 
 
+
 const App = (() => {
     const projectContainer = document.querySelector(".projects-container");
-    const contentContainer = document.querySelector(".content");
+    const contentContainer = document.querySelector(".content-container");
+    const todosContainer = document.querySelector(".todo-container");
     const projectsUl = document.createElement("ul");
     const projectDialog = document.querySelector(".project-dialog");
     const overlay = document.querySelector(".overlay");
@@ -48,7 +51,9 @@ const App = (() => {
 
         const projectId = li.getAttribute("data-project-id");
         contentContainer.setAttribute("data-project-id", projectId);
-        renderContent(contentContainer);
+        todosContainer.setAttribute("data-project-id", projectId);
+        renderContentTitle(contentContainer);
+        renderTodos(todosContainer);
     }
 
     function handleDeleteProject(event) {
