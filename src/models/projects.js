@@ -5,14 +5,6 @@ export class Project {
         this.description = description;
         this.todos = [];
     }
-
-    getTodos() {
-        return this.todos;
-    }
-
-    addTodos(todo) {
-        this.todos.push(todo)
-    }
 }
 
 

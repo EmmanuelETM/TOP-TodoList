@@ -75,15 +75,35 @@
         <form action="/">
             <div class="project-title">
                 <label for="project-title">Name: </label>
-                <input type="text" name="projectTitle" id="project-title"/>
+                <input type="text" name="projectTitle" id="project-title" required/>
             </div>
             <div class="project-description">
                 <label for="project-description">Description</label>
                 <textarea name="projectDescription" id="project-description"></textarea>
             </div>
             <button class="create-project" type="submit">
-                <i class="fa-solid fa-plus"></i>
-                Create Project
+                Enter
+            </button>
+        </form>
+    </dialog>
+
+    <!-- project edit -->
+    <dialog class="project-edit-dialog">
+        <button class="close-edit-project">
+            <i class="fa-solid fa-x"></i>
+        </button>
+        <form action="/">
+            <div class="project-title">
+                <label for="project-title">Name: </label>
+                <input type="text" name="projectTitle" id="project-edit-title"/>
+            </div>
+            <div class="project-description">
+                <label for="project-description">Description:</label>
+                <textarea name="projectDescription" id="project-edit-description"></textarea>
+            </div>
+            <button class="update-project-button" type="submit">
+                <i class="fa-solid fa-pen"></i>
+                Update
             </button>
         </form>
     </dialog>
@@ -96,7 +116,7 @@
         <form action="/">
             <div class="todo-title">
                 <label for="todo-title">Title</label>
-                <input type="text" name="todoTitle" id="todo-title"/>
+                <input type="text" name="todoTitle" id="todo-title" required/>
             </div>
             <div class="todo-description">
                 <label for="todo-description">Description</label>
@@ -105,14 +125,14 @@
             <div class="date-priority">
                 <div class="date-container">
                     <label for="due-date">Due Date</label>
-                    <input type="date" name="dueDate" id="due-date">
+                    <input type="datetime-local" name="dueDate" id="due-date" required>
                 </div>
                 <div class="priority-container">
                     <label for="priority">Priority</label>
                     <select name="priority" id="priority">
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
                         <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
                     </select>
                 </div>
             </div>

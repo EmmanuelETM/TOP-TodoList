@@ -1,16 +1,19 @@
+//Dom functions
+import { renderSidebar } from "./dom/renderSidebar";
+import { renderContentTitle } from './dom/renderContentTitle';
+import { renderTodos } from "./dom/renderTodos";
+
+//Controllers
+import { deleteProject, deleteTodo } from "./controllers/storage/store";
+import { createProject } from "./controllers/project";
+import { createTodo } from "./controllers/todo";
+
+//css
 import "./styles/index.css";
 import "./styles/content.css";
 import "./styles/dialog.css";
 import "./styles/sidebar.css";
-import { renderProjects, renderSidebar } from "./dom/renderSidebar";
-import { renderContentTitle } from './dom/renderContentTitle';
-import { renderTodos } from "./dom/renderTodos";
-import { deleteProject } from "./controllers/storage/store";
-import { createProject } from "./controllers/project";
-import { createTodo } from "./controllers/todo";
-import { getTodos } from "./controllers/storage/getTodos";
-
-
+import { editProject } from "./controllers/storage/editProject";
 
 const App = (() => {
     const projectContainer = document.querySelector(".projects-container");
@@ -18,13 +21,15 @@ const App = (() => {
     const todosContainer = document.querySelector(".todo-container");
     const projectsUl = document.createElement("ul");
     const projectDialog = document.querySelector(".project-dialog");
+    const projectEditDialog = document.querySelector(".project-edit-dialog");
     const overlay = document.querySelector(".overlay");
     const addProject = document.querySelector(".add-project");
     const closeProject = document.querySelector(".close-project");
+    const closeEditProject = document.querySelector(".close-edit-project");
     const todoDialog = document.querySelector(".todo-dialog");
-    const addTodo = document.querySelector(".add-todo");
     const closeTodo = document.querySelector(".close-todo");
     const projectDialogForm = document.querySelector(".project-dialog>form");
+    const projectEditForm = document.querySelector(".project-edit-dialog>form");
     const deleteProjectButtons = document.querySelectorAll('.delete-item');
 
     if (!localStorage.getItem("projects")) {
@@ -32,6 +37,7 @@ const App = (() => {
         createProject("Home", 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis atque amet et cum dolor quasi mollitia omnis necessitatibus');
     }
 
+    //Event Handlers
     function handleProjectForm(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -42,7 +48,31 @@ const App = (() => {
 
         projectDialog.close();
         overlay.classList.remove("active");
-        console.log(dataObj);
+    }
+
+    function handleEditProjectForm(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const dataObj = Object.fromEntries(formData);
+        const id = contentContainer.getAttribute("data-project-id");
+        editProject(id, dataObj);
+        renderContentTitle(contentContainer);
+        renderSidebar(projectContainer, projectsUl);
+        projectEditDialog.close();
+        overlay.classList.remove("active");
+    }
+
+    function handleTodoForm(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const dataObj = Object.fromEntries(formData);
+        const projectId = contentContainer.getAttribute("data-project-id");
+
+        createTodo(projectId, dataObj.todoTitle, dataObj.todoDescription, dataObj.dueDate, dataObj.priority, "pending");
+        renderTodos(todosContainer);
+        
+        todoDialog.close();
+        overlay.classList.remove("active");
     }
 
     function handleLiClick(event) {
@@ -67,6 +97,17 @@ const App = (() => {
         renderSidebar(projectContainer, projectsUl);
     }
 
+    function handleDeleteTodo(event) {
+        const todoItem = event.target.closest(".todo-item");
+        if(!todoItem || !event.target.closest(".delete-todo")) return;
+
+        const projectId = event.currentTarget.getAttribute("data-project-id");
+        const todoId = todoItem.getAttribute("data-todo-id");
+
+        deleteTodo(projectId, todoId);
+        renderTodos(todosContainer);
+    }
+
     renderSidebar(projectContainer, projectsUl);
 
     addProject.addEventListener("click", () => {
@@ -79,16 +120,20 @@ const App = (() => {
         overlay.classList.remove("active");
     })
 
+    closeEditProject.addEventListener("click", () => {
+        projectEditDialog.close();
+        overlay.classList.remove("active");
+    })
+
     deleteProjectButtons.forEach(button => {
         button.addEventListener("click", handleDeleteProject);
     });
 
     projectDialogForm.addEventListener("submit", handleProjectForm);
 
-    addTodo.addEventListener("click", () => {
-        todoDialog.showModal();
-        overlay.classList.add("active");
-    })
+    projectEditDialog.addEventListener("submit", handleEditProjectForm);
+
+    todoDialog.addEventListener("submit", handleTodoForm);
 
     closeTodo.addEventListener("click", () => {
         todoDialog.close();
@@ -96,12 +141,9 @@ const App = (() => {
     })
 
     projectsUl.addEventListener("click", handleLiClick);
-    
-
     projectsUl.addEventListener("click", handleDeleteProject);
 
-
-    
+    todosContainer.addEventListener("click", handleDeleteTodo);
 
 })();
 

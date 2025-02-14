@@ -43,7 +43,7 @@ option {
     background-color: white;
 }
 
-.close-project, .close-todo {
+.close-project, .close-todo, .close-edit-project, .close-edit-todo {
     position: fixed;
     right: 2rem;
     border-radius: 2rem;
@@ -55,13 +55,13 @@ option {
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
-.close-project:hover, .close-todo:hover {
+.close-project:hover, .close-todo:hover, .close-edit-project:hover, .close-edit-todo:hover {
     background-color: var(--red);
     opacity: 1;
     color: black;
 }
 
-.create-todo, .create-project {
+.create-todo, .create-project, .update-project-button {
     width: 80%;
     margin-top: 2rem;
     margin-bottom: 2rem;

@@ -1,11 +1,27 @@
 export function renderContentTitle(container) {
-
     container.innerText = "";
     let id = container.getAttribute("data-project-id");
     let data = JSON.parse(localStorage.getItem("projects"));
     let project = data.find(element => element.id === id);
+    const todoDialog = document.querySelector(".todo-dialog");
+    const editDialog = document.querySelector(".project-edit-dialog");
+    const overlay = document.querySelector(".overlay");
 
-    console.log(project);
+    function handleAddTodo() {
+        todoDialog.showModal();
+        overlay.classList.add("active");
+    }
+
+    function handleEditProject() {
+        editDialog.showModal();
+        overlay.classList.add("active");
+
+        const title = document.querySelector("#project-edit-title");
+        const description = document.querySelector("#project-edit-description");
+
+        title.value = project.name;
+        description.innerText = project.description;
+    }
 
     const contentTitle = document.createElement("div");
     const contentText = document.createElement("h1");
@@ -24,6 +40,8 @@ export function renderContentTitle(container) {
     editProjectIcon.classList.add("fa-solid");
     editProjectIcon.classList.add("fa-pen-to-square");
 
+    editProject.addEventListener("click", handleEditProject);
+
     editProject.appendChild(editProjectIcon);
     contentTitle.classList.add("content-title");
     contentTitle.appendChild(contentText);
@@ -40,6 +58,8 @@ export function renderContentTitle(container) {
     addSpan.textContent = "0% completed";
     addTodo.textContent = "+ Add Todo";
     addTodo.classList.add("add-todo");
+
+    addTodo.addEventListener("click", handleAddTodo);
     addContainer.classList.add("add-container");
     addContainer.appendChild(addSpan);
     addContainer.appendChild(addTodo);
