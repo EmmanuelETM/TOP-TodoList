@@ -1,19 +1,19 @@
 //Dom functions
-import { renderSidebar } from "./dom/renderSidebar";
-import { renderContentTitle } from './dom/renderContentTitle';
-import { renderTodos } from "./dom/renderTodos";
-import { renderToday } from "./dom/renderToday";
-import { renderUpcoming } from "./dom/renderUpcoming";
-import { renderCompleted } from "./dom/renderCompleted";
+import { renderSidebar } from "./dom/renderSidebar.js";
+import { renderContentTitle } from './dom/renderContentTitle.js';
+import { renderTodos } from "./dom/renderTodos.js";
+import { renderToday } from "./dom/renderToday.js";
+import { renderUpcoming } from "./dom/renderUpcoming.js";
+import { renderCompleted } from "./dom/renderCompleted.js";
 
 //Controllers
-import { deleteProject, deleteTodo } from "./controllers/store";
-import { createProject } from "./controllers/createProject";
-import { createTodo } from "./controllers/createTodo";
-import { editProject } from "./controllers/editProject";
-import { editTodo } from "./controllers/editTodo";
-import { getTodo } from "./controllers/getTodo";
-import { toggleComplete } from "./controllers/toggleComplete";
+import { deleteProject, deleteTodo } from "./controllers/store.js";
+import { createProject } from "./controllers/createProject.js";
+import { createTodo } from "./controllers/createTodo.js";
+import { editProject } from "./controllers/editProject.js";
+import { editTodo } from "./controllers/editTodo.js";
+import { getTodo } from "./controllers/getTodo.js";
+import { toggleComplete } from "./controllers/toggleComplete.js";
 
 //css
 import "./styles/index.css";

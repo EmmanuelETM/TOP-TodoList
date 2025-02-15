@@ -1,12 +1,9 @@
-
-// Store projects 
 function storeProject(project) {
     const projects = JSON.parse(localStorage.getItem("projects"));
     projects.push(project);
     localStorage.setItem("projects", JSON.stringify(projects));
 }
 
-// Delete project
 function deleteProject(projectId) {
     let projects = JSON.parse(localStorage.getItem("projects"));
     projects = projects.filter(project => project.id !== projectId);
@@ -14,7 +11,6 @@ function deleteProject(projectId) {
     localStorage.setItem("projects", JSON.stringify(projects));
 }
 
-// Store Todo 
 function storeTodo(projectId, todo) {
     let data = JSON.parse(localStorage.getItem("projects"));
 
@@ -28,7 +24,6 @@ function storeTodo(projectId, todo) {
     localStorage.setItem("projects", JSON.stringify(data));
 }
 
-// Delete Todo
 function deleteTodo(projectId, todoId) {
     let data = JSON.parse(localStorage.getItem("projects"));
 

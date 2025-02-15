@@ -1,5 +1,5 @@
-import { Todo } from "../models/todo"
-import { storeTodo } from "./store";
+import { Todo } from "../models/todo.js"
+import { storeTodo } from "./store.js";
 
 export function createTodo(projectId, title, description, dueDate, priority, status) {
     const id = crypto.randomUUID();

@@ -1,5 +1,5 @@
-import { Project } from "../models/projects"
-import {storeProject } from "./store"
+import { Project } from "../models/projects.js"
+import {storeProject } from "./store.js"
 
 export function createProject(name, description) {
     let id = crypto.randomUUID();
