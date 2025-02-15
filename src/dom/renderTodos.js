@@ -14,7 +14,7 @@ export function renderTodos(container) {
         const titleContainer = document.createElement("div");
         const checkSpan = document.createElement("span");
         const checkIcon = document.createElement("i");
-        const titleDate = document.createElement("div");
+        const todoData = document.createElement("div");
         const title = document.createElement("h4");
         const dueDate = document.createElement("p");
         const buttonContainers = document.createElement("div");
@@ -22,6 +22,8 @@ export function renderTodos(container) {
         const editIcon = document.createElement("i");
         const deleteTodo = document.createElement("button");
         const deleteIcon = document.createElement("i");
+        const description = document.createElement("div");
+        const p = document.createElement("p");
         
         checkSpan.classList.add("check");
         checkIcon.classList.add("fa-solid");
@@ -29,13 +31,19 @@ export function renderTodos(container) {
 
         title.textContent = todo.title;
         dueDate.textContent = todo.dueDate;
-        titleDate.classList.add("title-date");
-        titleDate.appendChild(title);
-        titleDate.appendChild(dueDate);
+
+        p.textContent = todo.description;
+        description.append(p);
+        description.classList.add("todo-description");
+
+        todoData.classList.add("todo-data");
+        todoData.appendChild(title);
+        todoData.appendChild(description);
+        todoData.appendChild(dueDate);
 
         titleContainer.classList.add("title-container");
         titleContainer.appendChild(checkSpan);
-        titleContainer.appendChild(titleDate);
+        titleContainer.appendChild(todoData);
 
         editTodo.classList.add("edit-todo");
         editIcon.classList.add("fa-solid");
@@ -63,6 +71,8 @@ export function renderTodos(container) {
             checkSpan.classList.add("checked");
             checkSpan.appendChild(checkIcon);
         }
+
+
 
         todoItem.setAttribute("data-todo-id", todo.id);
         todoItem.appendChild(titleContainer);

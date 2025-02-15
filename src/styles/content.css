@@ -101,7 +101,14 @@
     color: var(--crust);
     background-color: var(--blue);
     border: 1px var(--subtext-1) solid;
+    position: relative;
 }
+
+.todo-description {
+    color: var(--crust);
+    font-size: 1.8rem;
+}
+
 
 .edit-project {
     font-size: 2rem;
@@ -136,6 +143,12 @@
     align-items: center;
     justify-content: center;
     gap: 2rem;
+}
+
+.todo-data {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
 .high-priority {

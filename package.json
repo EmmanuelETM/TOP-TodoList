@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx webpack serve --open",
-    "buiild": "npx webpack"
+    "build": "npx webpack"
   },
   "author": "",
   "license": "ISC",

@@ -4,6 +4,7 @@ import { renderContentTitle } from './dom/renderContentTitle';
 import { renderTodos } from "./dom/renderTodos";
 import { renderToday } from "./dom/renderToday";
 import { renderUpcoming } from "./dom/renderUpcoming";
+import { renderCompleted } from "./dom/renderCompleted";
 
 //Controllers
 import { deleteProject, deleteTodo } from "./controllers/store";
@@ -48,11 +49,14 @@ const App = (() => {
     //Event Handlers
 
     function handleSidebarList(event) {
-        if(event.target.classList.contains("today")) {
+        if(event.target.classList.contains("today-projects")) {
             renderToday(contentContainer, todosContainer);
         }
-        else if (event.target.classList.contains("upcoming")) {
+        else if (event.target.classList.contains("upcoming-projects")) {
             renderUpcoming(contentContainer, todosContainer);
+        }
+        else if (event.target.classList.contains("completed-projects")) {
+            renderCompleted(contentContainer, todosContainer);
         }
     }
 
