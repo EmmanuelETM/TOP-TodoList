@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 //Dom functions
 import { renderSidebar } from "./dom/renderSidebar.js";
 import { renderContentTitle } from './dom/renderContentTitle.js';
@@ -5,7 +7,6 @@ import { renderTodos } from "./dom/renderTodos.js";
 import { renderToday } from "./dom/renderToday.js";
 import { renderUpcoming } from "./dom/renderUpcoming.js";
 import { renderCompleted } from "./dom/renderCompleted.js";
-
 //Controllers
 import { deleteProject, deleteTodo } from "./controllers/store.js";
 import { createProject } from "./controllers/createProject.js";
@@ -20,7 +21,7 @@ import "./styles/index.css";
 import "./styles/content.css";
 import "./styles/dialog.css";
 import "./styles/sidebar.css";
-
+import { renderLate } from "./dom/renderLate.js";
 
 const App = (() => {
     const projectContainer = document.querySelector(".projects-container");
@@ -49,14 +50,17 @@ const App = (() => {
     //Event Handlers
 
     function handleSidebarList(event) {
-        if(event.target.classList.contains("today-projects")) {
+        if(event.target.classList.contains("today-todos")) {
             renderToday(contentContainer, todosContainer);
         }
-        else if (event.target.classList.contains("upcoming-projects")) {
+        else if (event.target.classList.contains("upcoming-todos")) {
             renderUpcoming(contentContainer, todosContainer);
         }
-        else if (event.target.classList.contains("completed-projects")) {
+        else if (event.target.classList.contains("completed-todos")) {
             renderCompleted(contentContainer, todosContainer);
+        }
+        else if (event.target.classList.contains("late-todos")) {
+            renderLate(contentContainer, todosContainer);
         }
     }
 

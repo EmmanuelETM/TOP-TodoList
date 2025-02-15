@@ -7,7 +7,7 @@ todos.sort((a, b) => {
     return compareDesc(new Date(a.dueDate), new Date(b.dueDate));
 });
 
-export function renderUpcoming(titleContainer, todosContainer) {
+export function renderLate(titleContainer, todosContainer) {
     titleContainer.innerText = "";
     todosContainer.innerText = "";
     let id = titleContainer.getAttribute("data-project-id");
@@ -22,7 +22,7 @@ export function renderUpcoming(titleContainer, todosContainer) {
     const hr = document.createElement("hr");
 
     // Content title
-    contentText.textContent = "Upcoming";
+    contentText.textContent = "Late";
     contentText.classList.add("content-text");
 
     contentTitle.classList.add("content-title");

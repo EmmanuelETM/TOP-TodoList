@@ -50,6 +50,7 @@
     border: none;
     border-radius: 1rem;
     box-shadow: none;
+    cursor: pointer;
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
@@ -109,7 +110,6 @@
     font-size: 1.8rem;
 }
 
-
 .edit-project {
     font-size: 2rem;
     color: var(--text);
@@ -140,13 +140,15 @@
 
 .title-container {
     display: flex;
+    flex: 1;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 2rem;
 }
 
 .todo-data {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 0.8rem;
 }
@@ -161,6 +163,9 @@
     border: none;
 }
 
+.date {
+    font-size: 1.5rem;
+}
 /* form {
     .create-todo, .create-project {
         width: 80%;

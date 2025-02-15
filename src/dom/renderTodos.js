@@ -1,3 +1,5 @@
+import { format, addDays, compareDesc } from "date-fns";
+
 export function renderTodos(container) {
     container.innerText = "";
     let id = container.getAttribute("data-project-id");
@@ -5,9 +7,13 @@ export function renderTodos(container) {
     let project = data.find(element => element.id === id);
     let todos = project.todos;
 
+    todos.sort((a, b) => {
+        return compareDesc(new Date(a.dueDate), new Date(b.dueDate));
+    });
+    
     todos.sort(a => {
         return a.status === "completed" ? 1 : -1;
-    })
+    });
 
     todos.forEach(todo => {
         const todoItem = document.createElement("div");
@@ -30,7 +36,8 @@ export function renderTodos(container) {
         checkIcon.classList.add("fa-circle-check");
 
         title.textContent = todo.title;
-        dueDate.textContent = todo.dueDate;
+        dueDate.textContent = format(addDays(new Date(todo.dueDate), 1), "MMMM dd yyyy");
+        dueDate.classList.add("date");
 
         p.textContent = todo.description;
         description.append(p);
@@ -71,9 +78,7 @@ export function renderTodos(container) {
             checkSpan.classList.add("checked");
             checkSpan.appendChild(checkIcon);
         }
-
-
-
+        
         todoItem.setAttribute("data-todo-id", todo.id);
         todoItem.appendChild(titleContainer);
         todoItem.appendChild(buttonContainers);
