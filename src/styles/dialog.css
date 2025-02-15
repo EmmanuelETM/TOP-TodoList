@@ -61,7 +61,7 @@ option {
     color: black;
 }
 
-.create-todo, .create-project, .update-project-button {
+.create-todo, .create-project, .update-project, .update-todo {
     width: 80%;
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -74,11 +74,11 @@ option {
 }
 
 
-.todo-dialog {
+.todo-dialog, .edit-todo-dialog {
     width: 50%;
 }
 
-.project-dialog {
+.project-dialog, .edit-project-dialog {
     width: 30%;
 }
 
@@ -104,17 +104,16 @@ option {
     width: 80%;
 }
 
-.todo-title>input, .project-title>input, .todo-description>textarea, .project-description>textarea {
+input, textarea, select {
+    padding: 2rem;
+    font-size: 1.5rem;
     border-radius: 0.6rem;
 }
 
-.todo-title>input, .project-title>input {
-    padding: 1rem;
-}
-
-.todo-description>textarea, .project-description>textarea {
+textarea {
     max-width: 100%;
     min-width: 100%;
+    field-sizing: content;
 }
 
 .overlay {

@@ -16,21 +16,16 @@
     <main>
         <aside class="projects-container">
             <ul class="sidebar-list">
-                <li>
+                <li class="today">
                     <i  class="fa-solid fa-bolt"
                         style="color: var(--peach)"></i> 
                     Today
-                    <span class="todo-count">1</span>
+                    <span class="today-count">1</span>
                 </li>
-                <li>
+                <li class="upcoming">
                     <i class="fa-solid fa-calendar-week"></i> 
                     Upcoming
-                    <span class="todo-count">2</span>
-                </li>
-                <li>
-                    <i class="fa-solid fa-circle-check"></i>
-                    Completed
-                    <span class="todo-count">1</span>
+                    <span class="upcoming-count">2</span>
                 </li>
             </ul>
             <hr>
@@ -44,21 +39,8 @@
         <div class="section-footer">
             <section>
                 <div class="container">
-                    <div class="content-container">
-                        <div class="content-title">
-                            <h1 class="content-text">Today</h1>
-                            <button class="edit-project"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </div>
-                        <div class="content-description">
-                        </div>
-                        <div class="add-container">
-                            <span>0% completed</span>
-                            <button class="add-todo">+ Add Todo</button>
-                        </div>
-                        <hr class="todo-hr">
-                    </div>
-                    <div class="todo-container">
-                    </div>
+                    <div class="content-container"></div>
+                    <div class="todo-container"></div>
                 </div>
             </section>
             <footer>
@@ -82,26 +64,27 @@
                 <textarea name="projectDescription" id="project-description"></textarea>
             </div>
             <button class="create-project" type="submit">
-                Enter
+                <i class="fa-solid fa-plus"></i>
+                 Create Project
             </button>
         </form>
     </dialog>
 
     <!-- project edit -->
-    <dialog class="project-edit-dialog">
+    <dialog class="edit-project-dialog">
         <button class="close-edit-project">
             <i class="fa-solid fa-x"></i>
         </button>
         <form action="/">
             <div class="project-title">
                 <label for="project-title">Name: </label>
-                <input type="text" name="projectTitle" id="project-edit-title"/>
+                <input type="text" name="projectTitle" id="edit-project-title"/>
             </div>
             <div class="project-description">
                 <label for="project-description">Description:</label>
-                <textarea name="projectDescription" id="project-edit-description"></textarea>
+                <textarea name="projectDescription" id="edit-project-description"></textarea>
             </div>
-            <button class="update-project-button" type="submit">
+            <button class="update-project" type="submit">
                 <i class="fa-solid fa-pen"></i>
                 Update
             </button>
@@ -125,7 +108,7 @@
             <div class="date-priority">
                 <div class="date-container">
                     <label for="due-date">Due Date</label>
-                    <input type="datetime-local" name="dueDate" id="due-date" required>
+                    <input type="date" name="dueDate" id="due-date" required>
                 </div>
                 <div class="priority-container">
                     <label for="priority">Priority</label>
@@ -139,6 +122,41 @@
             <button class="create-todo" type="submit">
                 <i class="fa-solid fa-plus"></i>
                 Create Todo
+            </button>
+        </form>
+    </dialog>
+
+    <!-- edit todo -->
+    <dialog class="edit-todo-dialog">
+        <button class="close-edit-todo">
+            <i class="fa-solid fa-x"></i>
+        </button>
+        <form action="/">
+            <div class="todo-title">
+                <label for="todo-title">Title</label>
+                <input type="text" name="todoTitle" id="edit-todo-title" required/>
+            </div>
+            <div class="todo-description">
+                <label for="todo-description">Description</label>
+                <textarea name="todoDescription" id="edit-todo-description"></textarea>
+            </div>
+            <div class="date-priority">
+                <div class="date-container">
+                    <label for="due-date">Due Date</label>
+                    <input type="date" name="dueDate" id="edit-due-date" required>
+                </div>
+                <div class="priority-container">
+                    <label for="priority">Priority</label>
+                    <select name="priority" id="edit-priority">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+            </div>
+            <button class="update-todo" type="submit">
+                <i class="fa-solid fa-pen"></i>
+                Update
             </button>
         </form>
     </dialog>

@@ -4,7 +4,7 @@ export function renderContentTitle(container) {
     let data = JSON.parse(localStorage.getItem("projects"));
     let project = data.find(element => element.id === id);
     const todoDialog = document.querySelector(".todo-dialog");
-    const editDialog = document.querySelector(".project-edit-dialog");
+    const editDialog = document.querySelector(".edit-project-dialog");
     const overlay = document.querySelector(".overlay");
 
     function handleAddTodo() {
@@ -16,11 +16,11 @@ export function renderContentTitle(container) {
         editDialog.showModal();
         overlay.classList.add("active");
 
-        const title = document.querySelector("#project-edit-title");
-        const description = document.querySelector("#project-edit-description");
+        const title = document.querySelector("#edit-project-title");
+        const description = document.querySelector("#edit-project-description");
 
         title.value = project.name;
-        description.innerText = project.description;
+        description.value = project.description;
     }
 
     const contentTitle = document.createElement("div");
@@ -69,5 +69,4 @@ export function renderContentTitle(container) {
     container.appendChild(contentDescription);
     container.appendChild(addContainer);
     container.appendChild(hr);
-
 }

@@ -5,6 +5,10 @@ export function renderTodos(container) {
     let project = data.find(element => element.id === id);
     let todos = project.todos;
 
+    todos.sort(a => {
+        return a.status === "completed" ? 1 : -1;
+    })
+
     todos.forEach(todo => {
         const todoItem = document.createElement("div");
         const titleContainer = document.createElement("div");
@@ -14,7 +18,7 @@ export function renderTodos(container) {
         const title = document.createElement("h4");
         const dueDate = document.createElement("p");
         const buttonContainers = document.createElement("div");
-        const editTodo = document.createElement("buttoon");
+        const editTodo = document.createElement("button");
         const editIcon = document.createElement("i");
         const deleteTodo = document.createElement("button");
         const deleteIcon = document.createElement("i");
@@ -22,7 +26,6 @@ export function renderTodos(container) {
         checkSpan.classList.add("check");
         checkIcon.classList.add("fa-solid");
         checkIcon.classList.add("fa-circle-check");
-        checkSpan.appendChild(checkIcon);
 
         title.textContent = todo.title;
         dueDate.textContent = todo.dueDate;
@@ -54,6 +57,13 @@ export function renderTodos(container) {
         } else if(todo.priority === "Medium") {
             todoItem.classList.add("medium-priority");
         }
+
+        if(todo.status === "completed") {
+            todoItem.classList.add("completed");
+            checkSpan.classList.add("checked");
+            checkSpan.appendChild(checkIcon);
+        }
+
         todoItem.setAttribute("data-todo-id", todo.id);
         todoItem.appendChild(titleContainer);
         todoItem.appendChild(buttonContainers);

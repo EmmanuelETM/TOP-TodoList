@@ -1,4 +1,4 @@
-.todo-count {
+.today-count, .upcoming-count {
     margin-left: auto;
     color: var(--crust);
     background-color: var(--lavender);

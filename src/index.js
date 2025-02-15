@@ -2,35 +2,43 @@
 import { renderSidebar } from "./dom/renderSidebar";
 import { renderContentTitle } from './dom/renderContentTitle';
 import { renderTodos } from "./dom/renderTodos";
+import { renderToday } from "./dom/renderToday";
+import { renderUpcoming } from "./dom/renderUpcoming";
 
 //Controllers
-import { deleteProject, deleteTodo } from "./controllers/storage/store";
-import { createProject } from "./controllers/project";
-import { createTodo } from "./controllers/todo";
+import { deleteProject, deleteTodo } from "./controllers/store";
+import { createProject } from "./controllers/createProject";
+import { createTodo } from "./controllers/createTodo";
+import { editProject } from "./controllers/editProject";
+import { editTodo } from "./controllers/editTodo";
+import { getTodo } from "./controllers/getTodo";
+import { toggleComplete } from "./controllers/toggleComplete";
 
 //css
 import "./styles/index.css";
 import "./styles/content.css";
 import "./styles/dialog.css";
 import "./styles/sidebar.css";
-import { editProject } from "./controllers/storage/editProject";
+
 
 const App = (() => {
     const projectContainer = document.querySelector(".projects-container");
     const contentContainer = document.querySelector(".content-container");
     const todosContainer = document.querySelector(".todo-container");
+    const sidebarList = document.querySelector(".sidebar-list");
     const projectsUl = document.createElement("ul");
     const projectDialog = document.querySelector(".project-dialog");
-    const projectEditDialog = document.querySelector(".project-edit-dialog");
+    const projectEditDialog = document.querySelector(".edit-project-dialog");
     const overlay = document.querySelector(".overlay");
     const addProject = document.querySelector(".add-project");
     const closeProject = document.querySelector(".close-project");
     const closeEditProject = document.querySelector(".close-edit-project");
     const todoDialog = document.querySelector(".todo-dialog");
+    const editTodoDialog = document.querySelector(".edit-todo-dialog");
     const closeTodo = document.querySelector(".close-todo");
+    const closeEditTodo = document.querySelector(".close-edit-todo");
     const projectDialogForm = document.querySelector(".project-dialog>form");
-    const projectEditForm = document.querySelector(".project-edit-dialog>form");
-    const deleteProjectButtons = document.querySelectorAll('.delete-item');
+    const dialogs = document.querySelectorAll("dialog")
 
     if (!localStorage.getItem("projects")) {
         localStorage.setItem("projects", JSON.stringify([]));
@@ -38,6 +46,16 @@ const App = (() => {
     }
 
     //Event Handlers
+
+    function handleSidebarList(event) {
+        if(event.target.classList.contains("today")) {
+            renderToday(contentContainer, todosContainer);
+        }
+        else if (event.target.classList.contains("upcoming")) {
+            renderUpcoming(contentContainer, todosContainer);
+        }
+    }
+
     function handleProjectForm(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -48,6 +66,7 @@ const App = (() => {
 
         projectDialog.close();
         overlay.classList.remove("active");
+        event.target.reset();
     }
 
     function handleEditProjectForm(event) {
@@ -60,6 +79,7 @@ const App = (() => {
         renderSidebar(projectContainer, projectsUl);
         projectEditDialog.close();
         overlay.classList.remove("active");
+        event.target.reset();
     }
 
     function handleTodoForm(event) {
@@ -72,7 +92,7 @@ const App = (() => {
         renderTodos(todosContainer);
         
         todoDialog.close();
-        overlay.classList.remove("active");
+        event.target.reset();
     }
 
     function handleLiClick(event) {
@@ -108,50 +128,104 @@ const App = (() => {
         renderTodos(todosContainer);
     }
 
-    renderSidebar(projectContainer, projectsUl);
+    const handleEditTodoForm = (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const dataObj = Object.fromEntries(formData);
+        
+        const projectId = contentContainer.getAttribute("data-project-id")
+        const todoIndex = editTodoDialog.getAttribute("data-id");
 
-    addProject.addEventListener("click", () => {
-        projectDialog.showModal();
+        editTodo(projectId, todoIndex, dataObj);
+        renderTodos(todosContainer);
+
+        editTodoDialog.close();
+        event.target.reset();
+    }
+
+    const handleEditTodo = (event) => {
+        const todoItem = event.target.closest(".todo-item");
+        if(!todoItem || !event.target.closest(".edit-todo")) return;
+        const projectId = event.currentTarget.getAttribute("data-project-id");
+        const todoId = todoItem.getAttribute("data-todo-id");
+        const [index, todo] = getTodo(projectId, todoId);
+
+        editTodoDialog.setAttribute("data-id", index);
+        editTodoDialog.showModal();
         overlay.classList.add("active");
-    })
 
-    closeProject.addEventListener("click", () => {
-        projectDialog.close();
-        overlay.classList.remove("active");
-    })
+        const title = document.querySelector("#edit-todo-title");
+        const description = document.querySelector("#edit-todo-description");
+        const date = document.querySelector("#edit-due-date");
+        const priority = document.querySelector("#edit-priority");
 
-    closeEditProject.addEventListener("click", () => {
-        projectEditDialog.close();
-        overlay.classList.remove("active");
-    })
+        title.value = todo.title;
+        description.value = todo.description;
+        date.value = todo.dueDate;
+        priority.value = todo.priority
+    };
 
-    deleteProjectButtons.forEach(button => {
-        button.addEventListener("click", handleDeleteProject);
-    });
+    function handleToggleComplete(event) {
+        const todoItem = event.target.closest(".todo-item");
+        if(!todoItem || !event.target.closest(".check")) return;
+        const projectId = event.currentTarget.getAttribute("data-project-id");
+        const todoId = todoItem.getAttribute("data-todo-id");
+        const [index,] = getTodo(projectId, todoId);
+        
+        toggleComplete(projectId, index);
+        renderTodos(todosContainer);
+    }
 
-    projectDialogForm.addEventListener("submit", handleProjectForm);
+    function init() {
+        renderSidebar(projectContainer, projectsUl);
+        renderToday(contentContainer, todosContainer);
 
-    projectEditDialog.addEventListener("submit", handleEditProjectForm);
+        addProject.addEventListener("click", () => {
+            projectDialog.showModal();
+            overlay.classList.add("active");
+        })
+    
+        closeProject.addEventListener("click", () => {
+            projectDialog.close();
+        })
+    
+        closeEditProject.addEventListener("click", () => {
+            projectEditDialog.close();
+        })
+    
+        projectDialogForm.addEventListener("submit", handleProjectForm);
+    
+        projectEditDialog.addEventListener("submit", handleEditProjectForm);
+    
+        todoDialog.addEventListener("submit", handleTodoForm);
+    
+        editTodoDialog.addEventListener("submit", handleEditTodoForm);
+    
+        closeTodo.addEventListener("click", () => {
+            todoDialog.close();
+        })
+    
+        closeEditTodo.addEventListener("click", () => {
+            editTodoDialog.close();
+        })
 
-    todoDialog.addEventListener("submit", handleTodoForm);
+        sidebarList.addEventListener("click", handleSidebarList);
+    
+        projectsUl.addEventListener("click", handleLiClick);
+        projectsUl.addEventListener("click", handleDeleteProject);
+    
+        todosContainer.addEventListener("click", handleEditTodo);
+        todosContainer.addEventListener("click", handleDeleteTodo);
+        todosContainer.addEventListener("click", handleToggleComplete);
 
-    closeTodo.addEventListener("click", () => {
-        todoDialog.close();
-        overlay.classList.remove("active");
-    })
+        dialogs.forEach((dialog) => {
+            dialog.addEventListener("close", () => {
+                overlay.classList.remove("active");
+            })
+        })
+    }
 
-    projectsUl.addEventListener("click", handleLiClick);
-    projectsUl.addEventListener("click", handleDeleteProject);
-
-    todosContainer.addEventListener("click", handleDeleteTodo);
-
+    return {init};
 })();
 
-
-//     const todo1 = createTodo("test", "we testing this shit", "tomorrow", "high", "pending");
-// const todo2 = createTodo("test", "we testing this shit", "tomorrow", "high", "pending");
-// storeTodo("kewl", todo1);
-// storeTodo("kewl", todo2);
-// let project = JSON.parse(localStorage.getItem("projects"));
-// console.log(project);
-// storeProject({name: "kewl", todos: []})
+App.init();
