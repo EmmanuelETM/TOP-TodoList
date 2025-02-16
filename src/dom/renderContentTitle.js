@@ -55,6 +55,7 @@ export function renderContentTitle(container) {
     hr.classList.add("todo-hr");
 
     // add container
+    addSpan.classList.add("percentage");
     addSpan.textContent = "0% completed";
     addTodo.textContent = "+ Add Todo";
     addTodo.classList.add("add-todo");

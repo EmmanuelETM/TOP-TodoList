@@ -1,8 +1,11 @@
+import { format } from "date-fns";
+
 //Dom functions
 import { renderSidebar } from "./dom/renderSidebar.js";
 import { renderContentTitle } from './dom/renderContentTitle.js';
-import { renderTodos } from "./dom/renderTodos.js";
+import { refreshView } from "./dom/refreshView.js";
 import { renderToday } from "./dom/renderToday.js";
+import { renderLate } from "./dom/renderLate.js";
 import { renderUpcoming } from "./dom/renderUpcoming.js";
 import { renderCompleted } from "./dom/renderCompleted.js";
 
@@ -49,14 +52,21 @@ const App = (() => {
     //Event Handlers
 
     function handleSidebarList(event) {
-        if(event.target.classList.contains("today-projects")) {
+        if(event.target.classList.contains("today-todos")) {
             renderToday(contentContainer, todosContainer);
+            document.body.setAttribute("data-view", "today");
         }
-        else if (event.target.classList.contains("upcoming-projects")) {
+        else if (event.target.classList.contains("upcoming-todos")) {
             renderUpcoming(contentContainer, todosContainer);
+            document.body.setAttribute("data-view", "upcoming");
         }
-        else if (event.target.classList.contains("completed-projects")) {
+        else if (event.target.classList.contains("completed-todos")) {
             renderCompleted(contentContainer, todosContainer);
+            document.body.setAttribute("data-view", "completed");
+        }
+        else if (event.target.classList.contains("late-todos")) {
+            renderLate(contentContainer, todosContainer);
+            document.body.setAttribute("data-view", "late");
         }
     }
 
@@ -69,7 +79,6 @@ const App = (() => {
         renderSidebar(projectContainer, projectsUl);
 
         projectDialog.close();
-        overlay.classList.remove("active");
         event.target.reset();
     }
 
@@ -82,7 +91,6 @@ const App = (() => {
         renderContentTitle(contentContainer);
         renderSidebar(projectContainer, projectsUl);
         projectEditDialog.close();
-        overlay.classList.remove("active");
         event.target.reset();
     }
 
@@ -93,21 +101,23 @@ const App = (() => {
         const projectId = contentContainer.getAttribute("data-project-id");
 
         createTodo(projectId, dataObj.todoTitle, dataObj.todoDescription, dataObj.dueDate, dataObj.priority, "pending");
-        renderTodos(todosContainer);
+        refreshView(projectId, todosContainer);
         
         todoDialog.close();
         event.target.reset();
     }
 
     function handleLiClick(event) {
+        if(document.body.getAttribute("data-view") !== "project") {
+            document.body.setAttribute("data-view", "project");
+        }
         const li = event.target.closest("li");
         if (!li || event.target.closest(".delete-item")) return;
 
         const projectId = li.getAttribute("data-project-id");
         contentContainer.setAttribute("data-project-id", projectId);
-        todosContainer.setAttribute("data-project-id", projectId);
         renderContentTitle(contentContainer);
-        renderTodos(todosContainer);
+        refreshView(projectId, todosContainer);
     }
 
     function handleDeleteProject(event) {
@@ -125,11 +135,11 @@ const App = (() => {
         const todoItem = event.target.closest(".todo-item");
         if(!todoItem || !event.target.closest(".delete-todo")) return;
 
-        const projectId = event.currentTarget.getAttribute("data-project-id");
+        const projectId = todoItem.getAttribute("data-project-id");
         const todoId = todoItem.getAttribute("data-todo-id");
 
         deleteTodo(projectId, todoId);
-        renderTodos(todosContainer);
+        refreshView(projectId, todosContainer);
     }
 
     const handleEditTodoForm = (event) => {
@@ -137,11 +147,11 @@ const App = (() => {
         const formData = new FormData(event.target);
         const dataObj = Object.fromEntries(formData);
         
-        const projectId = contentContainer.getAttribute("data-project-id")
+        const projectId = editTodoDialog.getAttribute("data-project-id")
         const todoIndex = editTodoDialog.getAttribute("data-id");
 
         editTodo(projectId, todoIndex, dataObj);
-        renderTodos(todosContainer);
+        refreshView(projectId, todosContainer);
 
         editTodoDialog.close();
         event.target.reset();
@@ -150,11 +160,13 @@ const App = (() => {
     const handleEditTodo = (event) => {
         const todoItem = event.target.closest(".todo-item");
         if(!todoItem || !event.target.closest(".edit-todo")) return;
-        const projectId = event.currentTarget.getAttribute("data-project-id");
+        const projectId = todoItem.getAttribute("data-project-id");
         const todoId = todoItem.getAttribute("data-todo-id");
         const [index, todo] = getTodo(projectId, todoId);
 
         editTodoDialog.setAttribute("data-id", index);
+        editTodoDialog.setAttribute("data-project-id", projectId);
+
         editTodoDialog.showModal();
         overlay.classList.add("active");
 
@@ -172,17 +184,18 @@ const App = (() => {
     function handleToggleComplete(event) {
         const todoItem = event.target.closest(".todo-item");
         if(!todoItem || !event.target.closest(".check")) return;
-        const projectId = event.currentTarget.getAttribute("data-project-id");
+        let projectId = todoItem.getAttribute("data-project-id");
         const todoId = todoItem.getAttribute("data-todo-id");
         const [index,] = getTodo(projectId, todoId);
         
         toggleComplete(projectId, index);
-        renderTodos(todosContainer);
+        refreshView(projectId, todosContainer);
     }
 
     function init() {
         renderSidebar(projectContainer, projectsUl);
         renderToday(contentContainer, todosContainer);
+        document.body.setAttribute("data-view", "today");
 
         addProject.addEventListener("click", () => {
             projectDialog.showModal();
@@ -227,6 +240,7 @@ const App = (() => {
                 overlay.classList.remove("active");
             })
         })
+
     }
 
     return {init};

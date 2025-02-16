@@ -1,13 +1,12 @@
-export function renderCompleted(titleContainer, todoContainer) {
-    titleContainer.innerText = "";
-    todoContainer.innerText = "";
-    let id = titleContainer.getAttribute("data-project-id");
-    let data = JSON.parse(localStorage.getItem("projects"));
-    let project = data.find(element => element.id === id);
+import { allTodos } from "../controllers/allTodos.js";
+import { renderFilteredTodos } from "./renderFilteredTodos.js";
 
-    const todoDialog = document.querySelector(".todo-dialog");
-    const editDialog = document.querySelector(".edit-project-dialog");
-    const overlay = document.querySelector(".overlay");
+export function renderCompleted(titleContainer, todosContainer) {
+
+    const todos = allTodos().completed;
+
+    titleContainer.innerText = "";
+    todosContainer.innerText = ""
     const contentTitle = document.createElement("div");
     const contentText = document.createElement("h1");
     const hr = document.createElement("hr");
@@ -25,4 +24,6 @@ export function renderCompleted(titleContainer, todoContainer) {
     // content
     titleContainer.appendChild(contentTitle);
     titleContainer.appendChild(hr);
+
+    renderFilteredTodos(todosContainer, todos);
 }

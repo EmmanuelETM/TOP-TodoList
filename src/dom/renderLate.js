@@ -1,8 +1,10 @@
 import { allTodos } from "../controllers/allTodos.js";
 import { renderFilteredTodos } from "./renderFilteredTodos.js";
 
-export function renderUpcoming(titleContainer, todosContainer) {
-    const todos = allTodos().upcoming;
+
+export function renderLate(titleContainer, todosContainer) {
+
+    const todos = allTodos().late;
 
     titleContainer.innerText = "";
     todosContainer.innerText = "";
@@ -11,7 +13,7 @@ export function renderUpcoming(titleContainer, todosContainer) {
     const hr = document.createElement("hr");
 
     // Content title
-    contentText.textContent = "Upcoming";
+    contentText.textContent = "Late";
     contentText.classList.add("content-text");
 
     contentTitle.classList.add("content-title");
