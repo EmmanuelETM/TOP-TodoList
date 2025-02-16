@@ -22,6 +22,7 @@
     "webpack-dev-server": "^5.2.0"
   },
   "dependencies": {
+    "@date-fns/tz": "github:date-fns/tz",
     "date-fns": "^4.1.0"
   }
 }
