@@ -34,6 +34,14 @@ form {
     gap: 1.5rem;
 }
 
+label {
+    color: var(--text);
+}
+
+.description-label {
+    font-size: 2rem;
+}
+
 input, textarea, select {
     background-color: var(--text);
     font-family: "Outfit", serif;
