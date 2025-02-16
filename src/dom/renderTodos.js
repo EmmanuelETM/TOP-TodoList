@@ -1,10 +1,16 @@
 import { format, addDays, compareDesc } from "date-fns";
+import {percentage} from "../controllers/percentage.js"
 
 export function renderTodos(projectId, container) {
     container.innerText = "";
     let data = JSON.parse(localStorage.getItem("projects"));
     let project = data.find(element => element.id === projectId);
     let todos = project.todos;
+
+    //percentage in content title
+    const span = document.querySelector(".percentage");
+    let number = percentage(todos);
+    span.innerText = `${number}% completed`
 
     todos.sort((a, b) => {
         return compareDesc(new Date(a.dueDate), new Date(b.dueDate));
@@ -85,5 +91,7 @@ export function renderTodos(projectId, container) {
 
         container.appendChild(todoItem);
     });
+
+
 
 }

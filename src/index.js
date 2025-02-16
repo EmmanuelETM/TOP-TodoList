@@ -3,10 +3,12 @@ import { format } from "date-fns";
 //Dom functions
 import { renderSidebar } from "./dom/renderSidebar.js";
 import { renderContentTitle } from './dom/renderContentTitle.js';
-import { renderToday } from "./dom/renderToday.js";
 import { refreshView } from "./dom/refreshView.js";
+import { renderToday } from "./dom/renderToday.js";
+import { renderLate } from "./dom/renderLate.js";
 import { renderUpcoming } from "./dom/renderUpcoming.js";
 import { renderCompleted } from "./dom/renderCompleted.js";
+
 //Controllers
 import { deleteProject, deleteTodo } from "./controllers/store.js";
 import { createProject } from "./controllers/createProject.js";
@@ -21,7 +23,7 @@ import "./styles/index.css";
 import "./styles/content.css";
 import "./styles/dialog.css";
 import "./styles/sidebar.css";
-import { renderLate } from "./dom/renderLate.js";
+
 
 const App = (() => {
     const projectContainer = document.querySelector(".projects-container");
